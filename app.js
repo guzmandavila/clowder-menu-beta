@@ -1154,6 +1154,7 @@ async function registerSharedOrder(apiUrl, order){
 }
 
 async function sendOrder(){
+  alert("Beta de pruebas: no se envían pedidos."); return;
   if(sendingOrder) return;
 
   if(birthdayState().closed){ showUnavailableNotice(); return; }
