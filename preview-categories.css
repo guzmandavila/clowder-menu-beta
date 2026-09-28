@@ -240,3 +240,11 @@ body.category-preview.light-theme{--accent:#6b482f;--accent-ink:#fff8ed;--surfac
 .category-preview .product-options button[aria-pressed="true"][data-key="milk"],
 .category-preview .product-options button[aria-pressed="true"][data-key="syrup"]{background:var(--option-color,var(--surface));border-color:var(--option-color,var(--accent));color:var(--option-ink,var(--cream));box-shadow:inset 0 0 0 1px currentColor}
 .category-preview .product-options button[aria-pressed="true"] small{color:inherit}
+
+/* The selected tab joins the front sheet, above the inactive folders. */
+.category-rail button[aria-current]{z-index:4;transform:translateY(2px);box-shadow:0 -3px 10px #0000000a,4px 0 8px #0000000a}
+.category-rail button[aria-current]::after{content:'';position:absolute;left:-1px;right:-1px;bottom:-7px;height:9px;background:var(--folder-color);pointer-events:none}
+.category-folder{border-top-width:1px;box-shadow:0 5px 14px #00000006}
+.category-folder .section-heading{background:var(--folder-color);color:var(--folder-ink)}
+.category-preview .category-folder .section-heading :is(h1,p,.product-count,.product-count small){color:var(--folder-ink)}
+.category-folder .section-heading p,.category-folder .product-count small{opacity:.85}
