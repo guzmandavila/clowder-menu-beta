@@ -222,3 +222,21 @@ body.category-preview.light-theme{--accent:#6b482f;--accent-ink:#fff8ed;--surfac
  .category-preview .product-customize{font-size:16px}
  .category-preview .detail-order .primary-action{font-size:18px}
 }
+
+/* Beta: one search focus ring, readable prices and ingredient colors. */
+.category-preview .menu-search input:focus-visible{outline:none;box-shadow:none}
+.category-preview .menu-search:focus-within{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 18%,transparent)}
+.category-preview .product-price{display:inline-block;font:700 17px/1.3 Inter,sans-serif;letter-spacing:-.025em;color:var(--cream)}
+.category-preview .detail-base-price{display:inline-block;font:700 28px/1.2 Inter,sans-serif;padding:8px 13px;border-radius:10px;background:var(--surface);color:var(--accent)}
+.category-preview .cart-row .price{font-weight:700;font-size:18px}
+.category-preview .total-row .val{font-weight:700;font-size:28px}
+.category-preview .detail-order .primary-action span{font:700 16px/1.2 Inter,sans-serif;white-space:nowrap}
+.category-preview .order-amount{font-weight:700;font-size:13px}
+.product-options [data-key="milk"][data-value=""]{--option-color:#c9c3ee;--option-ink:#30294f}
+.product-options [data-key="milk"][data-value="almendra"]{--option-color:#c59a73;--option-ink:#352214}
+.product-options [data-key="syrup"][data-value="vainilla-francesa"]{--option-color:#f3e2ac;--option-ink:#4c3a19}
+.product-options [data-key="syrup"][data-value="avellana"]{--option-color:#ac7856;--option-ink:#20140e}
+.product-options [data-key="syrup"][data-value="caramelo-salado"]{--option-color:#dfa04d;--option-ink:#39230d}
+.category-preview .product-options button[aria-pressed="true"][data-key="milk"],
+.category-preview .product-options button[aria-pressed="true"][data-key="syrup"]{background:var(--option-color,var(--surface));border-color:var(--option-color,var(--accent));color:var(--option-ink,var(--cream));box-shadow:inset 0 0 0 1px currentColor}
+.category-preview .product-options button[aria-pressed="true"] small{color:inherit}
