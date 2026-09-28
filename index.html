@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clowder · Beta de pruebas</title>
+<meta name="description" content="Pide desde aquí y te llega directo a nuestro WhatsApp. Café, snacks y la bebida del mes.">
+<meta name="theme-color" content="#181310">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Clowder Coffee House - Pedidos">
+<link rel="manifest" href="manifest.webmanifest?v=9">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/clowder-icon-192-v9.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clowder Coffee House · Arma tu pedido">
+<meta property="og:description" content="Pide desde aquí y te llega directo a nuestro WhatsApp. Café, snacks y la bebida del mes.">
+<meta property="og:url" content="https://guzmandavila.github.io/clowder-menu-beta/">
+<meta property="og:image" content="https://guzmandavila.github.io/clowder-menu-beta/social/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/image-37567444807043c1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./preview-categories.css?v=clowder-type-1">
+</head>
+<body class="category-preview">
+<script>try{localStorage.setItem('clowder_beta_seen_guide','1')}catch(e){}</script>
+<script>
+  // Tema automático: claro durante el día y oscuro por la noche.
+  // Se vuelve a comprobar al cambiar de hora si la app queda abierta.
+  (function autoTheme(){
+    function applyTheme(){
+      const hour = new Date().getHours();
+      document.body.classList.toggle('light-theme', hour >= 7 && hour < 19);
+    }
+    function scheduleNextCheck(){
+      const nextHour = new Date();
+      nextHour.setMinutes(0, 0, 0);
+      nextHour.setHours(nextHour.getHours() + 1);
+      setTimeout(function(){ applyTheme(); scheduleNextCheck(); }, Math.max(1000, nextHour - new Date()));
+    }
+    applyTheme();
+    scheduleNextCheck();
+  })();
+</script>
+
+<div class="sticky-top">
+<header>
+  <div class="header-actions">
+  <div class="header-primary-actions">
+  <button class="hours-toggle" id="hoursToggle" onclick="openHours()" aria-label="Horarios de atención">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+  </button>
+  <button class="guide-toggle" id="guideToggle" onclick="openGuide()" aria-label="¿Cómo pido?">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2.5 2-2.5 3.5"/><line x1="12" y1="16.5" x2="12" y2="16.5"/></svg>
+    ¿Cómo pido?
+  </button>
+  <button class="pay-toggle" id="payToggle" onclick="openPayments()" aria-label="Pagar por transferencia">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    Transferencias
+  </button>
+  </div>
+  <div class="header-secondary-actions">
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+  </button>
+  <button class="install-toggle" id="installToggle" onclick="installApp()" aria-label="Instalar Clowder">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+    Instalar Clowder
+  </button>
+  </div>
+  </div>
+  <img class="logo" width="2250" height="2250" decoding="async" src="assets/clowder-gatito-dia.png" data-logo-day="assets/clowder-gatito-dia.png" data-logo-night="assets/clowder-gatito-noche.png" alt="Clowder">
+  <div class="tag-row">
+    <svg class="doodle-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L14.2 9.8 L24 12 L14.2 14.2 L12 24 L9.8 14.2 L0 12 L9.8 9.8 Z"/></svg>
+    <div class="tag">arma tu pedido</div>
+    <svg class="doodle-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L14.2 9.8 L24 12 L14.2 14.2 L12 24 L9.8 14.2 L0 12 L9.8 9.8 Z"/></svg>
+  </div>
+</header>
+<div class="compact-cat-title" id="compactCatTitle"></div>
+
+<div class="cats-wrap"><nav class="cats" id="cats"></nav></div>
+</div>
+
+<section id="birthdayNotice" hidden style="max-width:720px;margin:16px auto;padding:20px;border-radius:20px;background:#faef9a;color:#332519;box-sizing:border-box" aria-labelledby="birthdayTitle">
+  <img src="banners/cumple-gato-mesero.png" alt="El gato mesero celebra su cumpleaños con un pastel, café y un michi, en una ilustración cálida de Clowder." width="1049" height="1499" loading="lazy" decoding="async" style="display:block;width:100%;max-width:300px;height:auto;margin:0 auto 18px;border-radius:14px">
+  <h2 id="birthdayTitle" style="margin:0 0 8px">🎂 ¡El gato mesero está de cumpleaños!</h2>
+  <p id="birthdayHours" role="status"></p>
+  <p>Su mejor regalo: ayudar a los michis de la calle. Tu aporte de cumpleaños, desde $1, se destina a nuestra ayuda social animal. 🐾</p>
+  <form onsubmit="openBirthdayGift(event)" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <label for="birthdayAmount">Tu regalo ($)</label>
+    <input id="birthdayAmount" type="number" min="1" step="0.01" value="1" required style="width:90px;padding:10px;font:inherit">
+    <button type="submit" style="padding:12px;border-radius:12px;cursor:pointer;font:inherit">🎁 Regalar desde $1</button>
+  </form>
+  <p id="birthdayGiftInstructions" hidden>Transfiere el valor elegido a una de nuestras cuentas y adjunta tu comprobante en WhatsApp. <a id="birthdayReceipt" data-whatsapp target="_blank" rel="noopener">Enviar comprobante</a>. Abrir WhatsApp no confirma el aporte.</p>
+</section>
+<main id="menu"></main>
+
+<div class="footer-mascot">
+  <img src="assets/image-1241ecc6e22c2542.png" loading="lazy" decoding="async" width="900" height="891" alt="Clowder — Powered by coffee &amp; cat energy">
+  <div class="footer-mascot-tag">Powered by coffee &amp; cat energy</div>
+  <div class="footer-ig-cta">Ayúdanos a crecer: síguenos y comparte tu compra favorita</div>
+  <a class="footer-mascot-ig" href="https://www.instagram.com/clowdercoffeehouse/" target="_blank" rel="noopener" aria-label="Instagram de Clowder">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><defs><linearGradient id="igGradient" x1="2" y1="22" x2="22" y2="2"><stop stop-color="#feda75"/><stop offset=".35" stop-color="#fa7e1e"/><stop offset=".7" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="5" stroke="url(#igGradient)" stroke-width="2.2"/><circle cx="12" cy="12" r="4.2" stroke="url(#igGradient)" stroke-width="2.2"/><circle cx="17.4" cy="6.7" r="1.1" fill="#d62976"/></svg>
+    @clowdercoffeehouse
+  </a>
+  <a class="footer-suggestion-link" href="https://share.forms.app/form/6a9ef996fdd4755e6a546004" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 9.3 9.3 0 0 1-4.2-1L3 20l1.5-4.4A8.1 8.1 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/><path d="M8 11.5h8M12 7.5v8"/></svg><span>Buzón de sugerencias<span class="suggestion-caption">Tu idea puede hacer más bonita la experiencia</span></span></a>
+  <div class="dev-card">
+    <div class="dev-hook">¿Te gusta esta app?</div>
+    <div class="dev-hook-sub">¿Tienes algo en mente? Cuéntame.</div>
+    <a class="dev-btn dev-btn-wa dev-btn-full" href="#" data-whatsapp target="_blank" rel="noopener">Hablemos por WhatsApp</a>
+    <div class="dev-sign">Ronald Guzmán Dávila</div>
+  </div>
+  <div class="footer-version">v6 &middot; <span id="emojiCheck"></span></div>
+</div>
+
+<div class="cartbar" id="cartbar" role="button" tabindex="0" aria-label="Ver mi pedido">
+  <div class="left"><span class="count" id="cartCount">0</span> Ver mi pedido</div>
+  <div class="right"><span id="cartTotal">$0.00</span>
+    <svg class="cartbar-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </div>
+</div>
+<div class="order-complete" id="orderComplete" role="status" aria-live="polite">Continúa en WhatsApp<br><small>Envía allí el mensaje para completar tu pedido. Tu pedido queda guardado aquí por si necesitas reintentarlo.</small></div>
+
+<div class="overlay" id="paymentsOverlay">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h2>Pagar por transferencia</h2>
+      <button aria-label="Cerrar" onclick="closePayments()">✕</button>
+    </div>
+    <p class="modal-hint">Elige tu banco para ver el número de cuenta. Después de transferir, envía tu pedido igual por WhatsApp para que lo preparemos.</p>
+    <div class="banks" id="banksList"></div>
+    <div class="bank-details" id="bankDetails">
+      <div class="bank-account" id="bankAccountNumber"></div>
+      <div class="bank-field"><strong>Jorge Ronald Guzmán Dávila</strong></div>
+      <div class="bank-field">Cuenta Ahorros</div>
+      <div class="bank-field">Cédula: 0926355850</div>
+      <div class="bank-field">guzmandavila@proton.me</div>
+      <button class="send-btn" id="copyAccountBtn" style="margin-top:14px;" onclick="copyAccountNumber()">Copiar número</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="guideOverlay">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h2>¿Cómo pido?</h2>
+      <button aria-label="Cerrar" onclick="closeGuide()">✕</button>
+    </div>
+    <div class="guide-subtitle">Es súper fácil, mira:</div>
+    <div class="guide-steps">
+      <div class="guide-step">
+        <span class="guide-num">1</span>
+        <div class="guide-mock">
+          <span class="mock-cats-row">
+            <span class="mock-bubble" style="background:#442C19;"></span>
+            <span class="mock-bubble" style="background:#B6DAEA;"></span>
+            <span class="mock-bubble" style="background:#3F854A;"></span>
+          </span>
+        </div>
+        <div class="guide-caption">Toca una categoría</div>
+      </div>
+      <svg class="guide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="7 15 12 20 17 15"/></svg>
+      <div class="guide-step">
+        <span class="guide-num">2</span>
+        <div class="guide-mock">
+          <span class="mock-card">
+            <span class="mock-card-photo"></span>
+            <span class="mock-card-lines"><span></span><span></span></span>
+            <span class="mock-card-plus">+</span>
+          </span>
+        </div>
+        <div class="guide-caption">Toca el + en lo que quieras</div>
+      </div>
+      <svg class="guide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="7 15 12 20 17 15"/></svg>
+      <div class="guide-step">
+        <span class="guide-num">3</span>
+        <div class="guide-mock">
+          <span class="mock-cartbar">
+            <span class="mock-cartbar-count">2</span>
+            <span class="mock-cartbar-price">$8.50</span>
+          </span>
+        </div>
+        <div class="guide-caption">Abajo se arma tu carrito solo</div>
+      </div>
+      <svg class="guide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="7 15 12 20 17 15"/></svg>
+      <div class="guide-step">
+        <span class="guide-num">4</span>
+        <div class="guide-mock">
+          <span class="mock-input">Tu nombre</span>
+        </div>
+        <div class="guide-caption">Escribe tu nombre (¡no te olvides!)</div>
+      </div>
+      <svg class="guide-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="7 15 12 20 17 15"/></svg>
+      <div class="guide-step">
+        <span class="guide-num">5</span>
+        <div class="guide-mock">
+          <span class="mock-whatsapp">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm5.6 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.2.3-.3.5-.2.2-.3.3-.5.5-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.2 2.4 1.5 2.7 1.7.3.2.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1.3.1 1.7.8 2 1 .3.1.5.2.6.3.1.2.1.8-.1 1.5z"/></svg>
+          </span>
+        </div>
+        <div class="guide-caption">Toca enviar</div>
+        <div class="guide-subcaption">Se manda solo, no toques nada más en WhatsApp</div>
+      </div>
+    </div>
+    <button class="send-btn" onclick="closeGuide()">¡Ya entendí!</button>
+  </div>
+</div>
+
+<div class="overlay" id="bigOrderOverlay">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h2>¿Pedido grande?</h2>
+      <button aria-label="Cerrar" onclick="closeBigOrder()">✕</button>
+    </div>
+    <div class="bigorder-body">
+      <div class="bigorder-lead">Por aquí puedes pedir hasta 10 de cada producto.</div>
+      <div class="bigorder-text">Si necesitas más, escríbenos por WhatsApp y lo coordinamos contigo: así nos aseguramos de tener todo listo y a tiempo.</div>
+      <a class="bigorder-cta" href="#" data-whatsapp target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    </div>
+    <button class="send-btn" onclick="closeBigOrder()">Seguir con mi pedido</button>
+  </div>
+</div>
+
+<div class="overlay" id="hoursOverlay">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h2 id="hoursTitle">Horarios de atención</h2>
+      <button aria-label="Cerrar" onclick="closeHours()">✕</button>
+    </div>
+    <div class="closed-notice" id="hoursNotice">Ahora estamos fuera del horario del menú completo. Puedes revisar los horarios y volver a pedir cuando esté disponible.</div>
+    <div class="hours-list">
+      <div class="hours-row">
+        <div class="hours-days">Lunes a domingo</div>
+        <div class="hours-time">☕ Solo café · disponible todo el día</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-days">Lunes a sábado</div>
+        <div class="hours-time">Menú completo: 19h00 – 23h00</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-days">Domingos</div>
+        <div class="hours-time">Menú completo: 18h30 – 22h30</div>
+      </div>
+    </div>
+    <div class="modal-hint" style="text-align:center; margin:0 0 12px;">Fuera de esas franjas, solo se pueden pedir Bebidas Calientes.</div>
+    <button class="send-btn" onclick="closeHours()">¡Listo!</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="drawer">
+    <div class="drawer-head">
+      <h2>Tu pedido</h2>
+      <button aria-label="Cerrar" onclick="closeCart()">✕</button>
+    </div>
+    <div id="cartList"></div>
+    <div class="prep-time" id="prepTimeLine" style="display:none;"></div>
+
+    <div class="fields">
+      <div>
+        <label class="name-label" for="customerName">✎ Tu nombre <span class="name-required">*</span></label>
+        <div class="name-hint">Lo necesitamos para identificar tu pedido</div>
+        <input type="text" id="customerName" maxlength="80" autocomplete="given-name" placeholder="¿Cómo te llamas?" class="name-input" oninput="updateBars()">
+      </div>
+      <div id="modeFieldWrap">
+        <div class="toggle-row" id="modeToggleRow">
+          <button id="btnMesa" onclick="setMode('mesa')">Para servir</button>
+          <button id="btnLlevar" onclick="setMode('llevar')">Para llevar</button>
+          <button id="btnDelivery" onclick="setMode('delivery')">Delivery</button>
+        </div>
+        <div class="delivery-hint" id="deliveryHint"><strong>DELIVERY EN BICI</strong> · Canaria · Gratis · Según disponibilidad<br><span>Preparación + 5 min de entrega</span></div>
+        <div class="delivery-fields" id="deliveryFields">
+          <label>Manzana<input type="number" id="deliveryManzana" inputmode="numeric" pattern="[0-9]*" min="0" step="1" placeholder="Ej. 12" oninput="updateBars()"></label>
+          <label>Villa<input type="number" id="deliveryVilla" inputmode="numeric" pattern="[0-9]*" min="0" step="1" placeholder="Ej. 8" oninput="updateBars()"></label>
+          <button type="button" class="location-btn" onclick="shareLocation()">Compartir ubicación</button>
+          <div class="location-status" id="locationStatus"></div>
+          <div class="delivery-validation" id="deliveryValidation">Completa Manzana y Villa con números enteros válidos</div>
+        </div>
+      </div>
+      <div>
+        <label>¿Cómo vas a pagar?</label>
+        <div class="toggle-row">
+          <button id="btnEfectivo" onclick="setPay('efectivo')">Efectivo</button>
+          <button id="btnTransfer" onclick="setPay('transferencia')">Transferencia</button>
+        </div>
+        <div id="bankField" hidden style="margin:12px 0">
+          <label for="paymentBank">¿A qué banco transfieres?</label>
+          <select id="paymentBank" class="name-input" onchange="paymentBank=this.value; updateBars()">
+            <option value="">Selecciona el banco receptor</option>
+            <option>Guayaquil</option><option>Pichincha</option><option>Bolivariano</option><option>Pacífico</option><option>Produbanco</option>
+          </select>
+          <p class="name-hint">El banco de la cuenta que recibe tu pago.</p>
+        </div>
+        <div class="cash-change" id="cashChange">
+          <label>¿Con cuánto pagas?
+            <input type="number" id="cashAmount" inputmode="decimal" min="0.01" step="0.01" placeholder="Ej. 10.00" oninput="updateBars()">
+            <div class="cash-actions">
+              <button type="button" class="cash-exact" onclick="setExactCash()">Pago exacto</button>
+              <span class="cash-change-text" id="cashChangeText"></span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" id="packagingLine" style="display:none; text-align:right; margin-top:10px;"></div>
+    <div class="total-row">
+      <span class="lbl">Total</span>
+      <span class="val" id="drawerTotal">$0.00</span>
+    </div>
+
+    <p id="sendHint" class="modal-hint" role="status" aria-live="polite"></p>
+    <p id="whatsappRecovery" class="modal-hint" hidden>Tu pedido quedó registrado. Si WhatsApp no se abrió, <a id="whatsappRecoveryLink">abre WhatsApp aquí</a> y envía el mensaje. No necesitas crear otro pedido.</p>
+    <p id="contactError" class="modal-hint" role="alert" hidden></p>
+    <button class="send-btn" id="sendBtn" onclick="sendOrder()">Enviar pedido por WhatsApp</button>
+    <button class="new-order-btn" type="button" onclick="startNewOrder()">Empezar un pedido nuevo</button>
+  </div>
+</div>
+
+<script src="./contact-config.js"></script>
+<script src="./app.js"></script>
+<script src="./preview-categories.js?v=clowder-type-1"></script>
+</body>
+</html>
