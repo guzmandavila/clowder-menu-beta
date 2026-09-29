@@ -66,7 +66,7 @@ body.category-preview.light-theme{--accent:#6b482f;--accent-ink:#fff8ed;--surfac
 [data-tone="savory"]{--folder-color:#faef9a;--folder-ink:#443b18}
 .category-tile .category-label{background:var(--folder-color);color:var(--folder-ink)}
 .category-tile .category-label svg{color:inherit}
-.category-rail{position:sticky;top:72px;z-index:20;background:var(--bg);display:flex;gap:4px;padding:20px 0 0;isolation:isolate}
+.category-rail{position:relative;top:auto;z-index:2;background:var(--bg);display:flex;gap:4px;padding:20px 0 0;isolation:isolate}
 .category-rail button{position:relative;flex:1;min-width:0;min-height:52px;padding:12px 3px 10px;border:1px solid color-mix(in srgb,var(--folder-color) 60%,var(--hairline));border-bottom:0;border-radius:13px 13px 0 0;background:color-mix(in srgb,var(--folder-color) 22%,var(--bg));color:var(--cream);font:400 21px/1.1 Doughie,Inter,sans-serif;transition:background .18s,transform .18s;transform:translateY(5px)}
 .category-rail button::before{content:'';position:absolute;top:5px;left:calc(50% - 10px);width:20px;height:3px;border-radius:3px;background:var(--folder-color)}
 .category-rail button[aria-current]{z-index:2;background:var(--folder-color);color:var(--folder-ink);transform:none;padding-top:10px;box-shadow:0 -3px 12px #00000008}
@@ -284,3 +284,6 @@ body.category-preview.light-theme{--accent:#6b482f;--accent-ink:#fff8ed;--surfac
 .category-preview .product-detail>.flavor-options legend{font-size:22px;margin-bottom:10px}
 .category-preview .product-detail>.flavor-options button{min-height:86px;padding:13px 14px}
 .category-preview .product-detail>.flavor-options+.detail-heading{padding-top:16px}
+
+/* Folder tabs travel with their sheet instead of covering scrolling products. */
+@media(max-width:359px){.category-rail{top:auto}}
