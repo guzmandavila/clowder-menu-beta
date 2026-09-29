@@ -260,3 +260,21 @@ body.category-preview.light-theme{--accent:#6b482f;--accent-ink:#fff8ed;--surfac
 .category-preview .guide-beta{padding:14px;border-radius:12px;background:var(--surface);color:var(--cream)}
 .guide-question{margin:0 0 24px;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:16px 0}
 .guide-question summary{cursor:pointer;font:400 22px/1.3 Doughie,sans-serif;color:var(--cream)}
+
+/* Flavor cards: stable color identity, clear selection and availability. */
+.category-preview .flavor-options>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.flavor-options button{--flavor-bg:#d5c8df;--flavor-ink:#332639}
+.flavor-options [data-flavor="queso"]{--flavor-bg:#faef9a;--flavor-ink:#493919}
+.flavor-options [data-flavor="pollo"]{--flavor-bg:#e0a17b;--flavor-ink:#482716}
+.flavor-options [data-flavor="pizza"]{--flavor-bg:#df9789;--flavor-ink:#49251f}
+.category-preview .flavor-options button{position:relative;display:grid;grid-template-columns:1fr auto;gap:10px 6px;align-items:center;min-height:104px;padding:18px 14px;border:2px solid transparent;border-radius:18px;background:color-mix(in srgb,var(--flavor-bg) 24%,var(--bg));color:var(--cream);box-shadow:inset 0 5px 0 var(--flavor-bg);text-align:left}
+.category-preview .flavor-options button[aria-pressed=true]{background:var(--flavor-bg);color:var(--flavor-ink);border-color:var(--flavor-ink);box-shadow:0 4px 0 color-mix(in srgb,var(--flavor-ink) 18%,transparent)}
+.category-preview .flavor-options .flavor-name{font:400 27px/1.1 Doughie,sans-serif;overflow-wrap:anywhere}
+.category-preview .flavor-options .flavor-price{font:700 16px/1.2 Inter,sans-serif}
+.category-preview .flavor-options button small{grid-column:1/-1;font:400 17px/1.2 Doughie,sans-serif;color:inherit}
+.chosen-flavor{display:inline-block;margin:8px 0 2px;padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--accent);font:400 22px/1.2 Doughie,sans-serif}
+.product-detail[data-group="empanada"] .detail-photo{max-width:420px;height:auto;aspect-ratio:1.25;margin:0 auto;background:var(--surface)}
+.product-detail[data-group="empanada"] .detail-photo>img{object-fit:contain}
+.category-preview .product-detail[data-group="empanada"] .detail-heading h1{font-size:clamp(34px,8vw,46px);max-width:480px}
+.category-preview .detail-note{padding:12px 14px;border-left:3px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0}
+@media(max-width:359px){.category-preview .flavor-options button{padding:15px 10px;grid-template-columns:1fr}.category-preview .flavor-options .flavor-price{font-size:15px}}
