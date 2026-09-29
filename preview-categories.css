@@ -278,3 +278,9 @@ body.category-preview.light-theme{--accent:#6b482f;--accent-ink:#fff8ed;--surfac
 .category-preview .product-detail[data-group="empanada"] .detail-heading h1{font-size:clamp(34px,8vw,46px);max-width:480px}
 .category-preview .detail-note{padding:12px 14px;border-left:3px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0}
 @media(max-width:359px){.category-preview .flavor-options button{padding:15px 10px;grid-template-columns:1fr}.category-preview .flavor-options .flavor-price{font-size:15px}}
+
+/* Change flavor beside the photo, before reading the product details. */
+.category-preview .product-detail>.flavor-options{margin:16px 0 8px}
+.category-preview .product-detail>.flavor-options legend{font-size:22px;margin-bottom:10px}
+.category-preview .product-detail>.flavor-options button{min-height:86px;padding:13px 14px}
+.category-preview .product-detail>.flavor-options+.detail-heading{padding-top:16px}
